@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   	resources :transactions do
   	end
   end
+
+  root "users#index"
 end
