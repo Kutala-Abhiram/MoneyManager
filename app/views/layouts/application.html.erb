@@ -19,6 +19,9 @@
   </head>
 
   <body>
-    <%= render "layouts/navigation_bar" %>
+    <%= render "layouts/navigation_bar" if current_user %>
+    <div class="margin-left-20 margin-right-20"
+      <%= yield %>
+    </div>
   </body>
 </html>

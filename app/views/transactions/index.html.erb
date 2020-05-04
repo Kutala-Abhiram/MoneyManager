@@ -1,9 +1,7 @@
-<%= link_to new_user_transaction_path, 'new transaction' %>
-<%= @transactions.each do |transaction| %>
+<%= link_to "Transactions", user_transactions_path(current_user) %>
 	<li>
-		<ul><%= transaction.name %></ul>
-		<ul><%= transaction.date %></ul>
-		<ul><%= transaction.totol %></ul>
-		<ul><%= transaction.id %></ul>
+		<ul>Name</ul>
+		<ul>date </ul>
+		<ul>totol</ul>
+		<ul>id</ul>
 	</li>
-<% end %>
