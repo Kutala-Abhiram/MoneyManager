@@ -4,4 +4,9 @@ class UsersController < ApplicationController
 	def index
 		
 	end
+
+	def support
+		@email = "kabhiram1998@gmail.com"
+		@mobile = "+919944581756"
+	end
 end
