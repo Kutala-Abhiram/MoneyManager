@@ -5,6 +5,9 @@ class UsersController < ApplicationController
 		
 	end
 
+	def settings
+	end
+
 	def support
 		@email = "kabhiram1998@gmail.com"
 		@mobile = "+919944581756"

@@ -1,15 +1,40 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">WebSiteName</a>
+      <li class="nav navbar-brand">
+        <%= link_to "WebSiteName", root_path %>
+      </li>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><%= link_to "Dashboard", root_path %></li>
-      <li><%= link_to "Transactions", user_transactions_path(current_user) %></li>
-      <li><a href="#">Settings</a></li>
-      <li><%= link_to "Support", user_support_path(current_user) %></li>
+      <% if ["Dashboard"].include? yield(:title) %>
+        <li id="dashboard_nav" class="active">
+      <% else %>
+        <li id="dashboard_nav">
+      <% end %>
+        <%= link_to "Dashboard", root_path %>
+      </li>
+      <% if ["Transactions"].include? yield(:title) %>
+        <li id="transaction_nav" class="active">
+      <% else %>
+        <li id="transaction_nav">
+      <% end %>
+        <%= link_to "Transactions", user_transactions_path(current_user) %>
+      </li>
+      <% if ["Settings"].include? yield(:title) %>
+        <li id="settings_nav" class="active">
+      <% else %>
+        <li id="settings_nav">
+      <% end %>
+        <%= link_to "Settings", user_settings_path(current_user) %>        
+      </li>
+      <% if ["Support"].include? yield(:title) %>
+        <li id="support_nav" class="active">
+      <% else %>
+        <li id="support_nav">
+      <% end %>
+        <%= link_to "Support", user_support_path(current_user) %>    
+      </li>
       <li class="pull-right" ><%= link_to "logout", destroy_user_session_path %></li>
     </ul>
   </div>
 </nav>
-  
