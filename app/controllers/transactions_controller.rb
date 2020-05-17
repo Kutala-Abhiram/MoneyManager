@@ -11,7 +11,6 @@ class TransactionsController < ApplicationController
 	def create
 		transaction_data = transaction_params.merge!({transaction_date: Time.zone.now})
 		@transaction = Transaction.new(transaction_data)
-		byebug
 		@transaction.account = Transaction::ACCOUNT.key(params[:transaction][:account])
 		@transaction.user_id = current_user.id
 		@transaction.save
