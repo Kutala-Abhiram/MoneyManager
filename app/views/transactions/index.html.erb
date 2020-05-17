@@ -1,9 +1,34 @@
 <%= content_for :title, 'Transactions' %>
 
-<div class="pull-right">
-	<%= link_to new_user_transaction_path(current_user), remote: true, data: {target: "modal"}, :class => "btn btn-outline-primary btn-border-blue custom-btn" do %>
+<div class="col-md-12 col-sm-12 col-lg-12">
+	<%= link_to new_user_transaction_path(current_user), remote: true, data: {target: "modal"}, :class => "btn btn-outline-primary btn-border-blue custom-btn pull-right" do %>
 		<i class="fa fa-plus" aria-hidden="true"></i> New Transaction
 	<% end %>
+</div>
+<div class="hide-desktop warning-message transaction-mobile-margin">
+	<div class="text-padding-10">
+		Edit and Delete transactions are not available for mobile view
+	</div>
+</div>
+<div class="col-md-12 col-sm-12 col-lg-12">
+	<table>
+		<tr class="table_head">
+			<th>Transaction Date</th>
+			<th>Amount</th>
+			<th>Account</th>
+			<th class="hide-mobile">Edit</th>
+			<th class="hide-mobile">Delete</th>
+		</tr>
+		<% @transactions.each do |transaction| %>
+			<tr>
+				<th><%= transaction.transaction_date %></th>
+				<th><%= transaction.amount %></th>
+				<th><%= Transaction::ACCOUNT[transaction.account] %></th>
+				<th class="hide-mobile"></th>
+				<th class="hide-mobile"></th>
+			</tr>
+		<% end %>
+	</table>
 </div>
 
 <div class="modal fade" tabindex="-1" role="dialog" id="create_transaction_modal"></div>

@@ -43,3 +43,54 @@
 .margin-left-right-20 {
 	margin: 0px 20px;
 }
+
+table {
+	width: inherit;
+	margin: 20px 0px;
+}
+
+.table_head {
+	background: #337ab7;
+	color: white;
+}
+
+tr {
+	height: 40px;
+}
+
+th {
+  padding: 0px 20px !important;
+}
+
+div {
+	overflow-x: hidden;
+}
+
+.hide-desktop {
+	display: none;
+}
+
+.transaction-mobile-margin {
+  margin: 20px 10px 0px 10px;
+}
+
+.text-padding-10 {
+	padding: 10px;
+}
+
+.hide-desktop.warning-message {
+    border: 1px solid #ff9800;
+    border-radius: 10px;
+    font-size: medium;
+    color: #ff9800;
+}
+
+@media (max-width:767px){
+	.hide-mobile {
+		display: none;
+	}
+
+	.hide-desktop {
+		display: block;
+	}
+}
