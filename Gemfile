@@ -30,7 +30,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 # bootstap for css
 gem 'bootstrap', '~> 4.4.1'
-  
+gem 'font-awesome-sass', '~> 5.13.0'
 # jquery as the javascript library
 gem 'jquery-rails'
 

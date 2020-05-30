@@ -1,27 +1,27 @@
 <div class="modal-dialog" role="document">
-  <%= form_for @transaction, url: user_transactions_path(current_user), method: :post, html: {id: "transaction_form"} do |f| %>
+  <%= form_for @transaction, url: (@edit_form ? user_transaction_path(current_user, @transaction) : user_transactions_path(current_user)), method: (@edit_form ? :put : :post), html: {id: "transaction_form"} do |f| %>
 	  <div class="modal-content">
 	    <div class="modal-header">
 	      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	      <h4 class="modal-title">New Transaction</h4>
+	      <h4 class="modal-title"><%= @edit_form ? "Edit" : "New" %> Transaction</h4>
 	    </div>
 	    <div class="modal-body margin-left-right-20">
     		<div class="form-group">
     			<%= f.label :account, "Account" %>
-    			<%= f.select :account, options_for_select([Transaction::ACCOUNT[1],Transaction::ACCOUNT[2],Transaction::ACCOUNT[3]],@transaction.account), {}, class: "form-control" %>
+    			<%= f.select :account, options_for_select([Transaction::ACCOUNT[1],Transaction::ACCOUNT[2],Transaction::ACCOUNT[3]], selected: Transaction::ACCOUNT[f.object.try(:account)]), {}, class: "form-control" %>
     		</div>
     		<div class="form-group">
     			<%= f.label :amount, "Amount" %>
-    			<%= f.text_field :amount, class: "form-control" %>
+    			<%= f.text_field :amount, class: "form-control", value: @transaction.try(:amount) %>
     		</div>
     		<div class="form-group">
     			<%= f.label :contents, "Description" %>
-    			<%= f.text_field :contents, class: "form-control" %>
+    			<%= f.text_field :contents, class: "form-control", value: @transaction.try(:contents) %>
     		</div>
 	    </div>
 	    <div class="modal-footer">
 	    	<button type="button", class="btn btn-default" data-dismiss="modal">Close</button>
-	    	<%= f.submit "Submit", class: "btn btn-primary" %>
+	    	<%= f.submit @edit_form ? "Update" : "Submit", class: "btn btn-primary" %>
 	    </div>
 	  </div>
   <% end %>

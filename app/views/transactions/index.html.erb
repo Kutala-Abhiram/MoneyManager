@@ -24,7 +24,11 @@
 				<th><%= transaction.transaction_date %></th>
 				<th><%= transaction.amount %></th>
 				<th><%= Transaction::ACCOUNT[transaction.account] %></th>
-				<th class="hide-mobile"></th>
+				<th class="hide-mobile">
+					<%= link_to edit_user_transaction_path(transaction.id, user_id: current_user), remote: true, data: {target: "modal"} do %>
+						<i class="fa fa-edit"></i>
+					<% end %>
+				</th>
 				<th class="hide-mobile"></th>
 			</tr>
 		<% end %>
@@ -32,3 +36,4 @@
 </div>
 
 <div class="modal fade" tabindex="-1" role="dialog" id="create_transaction_modal"></div>
+<div class="modal fade" tabindex="-1" role="dialog" id="edit_transaction_modal"></div>
