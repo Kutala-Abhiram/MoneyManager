@@ -20,7 +20,7 @@
 			<th class="hide-mobile">Delete</th>
 		</tr>
 		<% @transactions.each do |transaction| %>
-			<tr>
+			<tr class="table_body">
 				<th><%= transaction.transaction_date %></th>
 				<th><%= transaction.amount %></th>
 				<th><%= Transaction::ACCOUNT[transaction.account] %></th>
