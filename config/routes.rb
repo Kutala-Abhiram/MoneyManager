@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   	end
   	get :settings
   	get :support
+  	get :generate_graph
   end
 
   root "users#index"

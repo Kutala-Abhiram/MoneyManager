@@ -1,2 +1,5 @@
 <%= content_for :title, 'Dashboard' %>
-<h1>Dashboard coming soon....</h1>
+<div>
+	<span class="col-md-6 col-sm-6 col-lg-6 image-medium"><img width= "100%" hspace="10" src='<%= user_generate_graph_path(current_user, graph_type: "transaction_count") %>' /></span>
+	<span class="col-md-6 col-sm-6 col-lg-6 image-medium"><img width= "100%" hspace="10" src='<%= user_generate_graph_path(current_user, graph_type: "transaction_amount") %>' /></span>
+</div>

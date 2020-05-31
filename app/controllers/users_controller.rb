@@ -5,6 +5,12 @@ class UsersController < ApplicationController
 		
 	end
 
+	def generate_graph
+		send_data(current_user.generate_graphs(params[:graph_type]).to_blob, 
+    :disposition => 'inline', 
+    :type => 'image/png')
+	end
+
 	def settings
 	end
 
