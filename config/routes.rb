@@ -12,5 +12,11 @@ Rails.application.routes.draw do
   	get :generate_graph
   end
 
+  namespace :api do
+    resources :transactions do
+    end
+    
+  end
+
   root "users#index"
 end
