@@ -43,6 +43,8 @@ gem 'devise'
 
 gem 'activeadmin'
 
+gem 'doorkeeper'
+
 #for graphs
 gem 'gruff'
 

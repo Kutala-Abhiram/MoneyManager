@@ -36,4 +36,9 @@ class User < ApplicationRecord
 		account_type_transactions = self.transactions.where(account: Transaction::ACCOUNT.key("accounts")).pluck(:amount).sum
 		return card_type_transactions, cash_type_transactions, account_type_transactions
 	end
+
+	def self.authenticate(email, password)
+     user = User.find_for_authentication(email: email)
+     user.try(:valid_password?, password) ? user : nil
+   end
 end
