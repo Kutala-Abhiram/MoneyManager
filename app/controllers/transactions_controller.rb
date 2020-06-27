@@ -15,16 +15,13 @@ class TransactionsController < ApplicationController
 
 	def create
 		transaction_data = transaction_params.merge!({transaction_date: Time.zone.now})
-		@transaction = Transaction.new(transaction_data)
-		@transaction.account = Transaction::ACCOUNT.key(params[:transaction][:account])
-		@transaction.user_id = current_user.id
-		@transaction.save
+		Transaction.create_transaction(params, transaction_data, current_user.id)
 		redirect_to user_transactions_path(current_user)
 	end
 
 	def update
 		@transaction = Transaction.find_by(id: params[:id])
-		@transaction.update(transaction_params.merge!(account: Transaction::ACCOUNT.key(params[:transaction][:account])))
+		@transaction.update_transaction(params, transaction_params)
 		redirect_to user_transactions_path(current_user)
 	end
 
