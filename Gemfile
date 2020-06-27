@@ -41,6 +41,8 @@ gem 'sprockets-rails', :require => 'sprockets/railtie'
 
 gem 'devise'
 
+gem 'activeadmin'
+
 #for graphs
 gem 'gruff'
 
