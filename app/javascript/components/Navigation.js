@@ -6,6 +6,10 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import Dashboard from './Dashboard.js';
+import Transactions from './Transactions.js';
+import Settings from './Settings.js';
+import Support from './Support.js';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -66,16 +70,16 @@ export default function Navigation() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        Dashboard
+        < Dashboard />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Transactions
+        < Transactions />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Settings
+        < Settings />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        Support
+        < Support />
       </TabPanel>
     </div>
   );
