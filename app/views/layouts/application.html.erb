@@ -21,8 +21,13 @@
 
   <body>
     <div class="page-wrapper">
-      <%= react_component("ReactHome") if current_user %>
-      
+      <%= 
+        if current_user
+          react_component("ReactHome")
+        else
+          yield
+        end
+      %>  
     </div>
   </body>
 </html>
