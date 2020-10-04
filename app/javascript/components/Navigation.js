@@ -33,6 +33,89 @@ function TabPanel(props) {
   );
 }
 
+const NewTransaction = (props) => {
+  const {classes, ...other} = props;
+  return (
+    <Grid item xs={6} sm={2} className={classes.transaction}>
+      <div className={classes.transaction}>
+        <Button variant="outlined" color="primary">New Transaction</Button>      
+      </div>
+    </Grid>
+  );
+}
+
+const MobileView = (props) => {
+  const {classes, value, handleChange, ...other} = props;
+
+  return (
+    <div>
+      <Grid container className={classes.borderBottom}>
+        <Grid item xs={6} sm={1}>
+        </Grid>
+        <NewTransaction classes={classes} />
+        <AppGrid classes={classes} value={value} handleChange={handleChange} />
+      </Grid>
+      <TabPanels classes={classes} value={value} handleChange={handleChange} />      
+    </div>
+  );
+}
+
+const WebView = (props) => {
+  const {classes, value, handleChange, ...other} = props;
+
+  return (
+    <div>
+      <Grid container className={classes.borderBottom}>
+        <Grid item xs={6} sm={1}>
+        </Grid>
+        <AppGrid classes={classes} value={value} handleChange={handleChange} />
+        <NewTransaction classes={classes} />
+      </Grid>
+      <TabPanels classes={classes} value={value} handleChange={handleChange} />      
+    </div>
+  );
+}
+
+const AppGrid = (props) => {
+  const {classes, value, handleChange, ...other} = props;
+
+  return (
+    <Grid item xs={12} sm={9}>
+      <div className={classes.root}>
+        <AppBar position="static" className={classes.tabsRoot}>
+          <Tabs value={value} onChange={handleChange} aria-label="Navigation Bar">
+            <Tab label="Board" {...a11yProps(0)} />
+            <Tab label="Transactions" {...a11yProps(1)} />
+            <Tab label="Settings" {...a11yProps(2)} />
+            <Tab label="Support" {...a11yProps(2)} />
+          </Tabs>
+        </AppBar>
+      </div>  
+    </Grid>
+  );
+}
+
+const TabPanels = (props) => {
+  const {classes, value, handleChange, ...other} = props;
+
+  return (
+    <div>
+      <TabPanel value={value} index={0}>
+        < Dashboard />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        < Transactions />
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        < Settings />
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        < Support />
+      </TabPanel>
+    </div>
+  );
+}
+
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
@@ -54,7 +137,7 @@ const useStyles = makeStyles((theme) => ({
   transaction: {
     display: 'flex',
     height: 'inherit',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-evenly',
     padding: '5px'
   },
   tabsRoot: {
@@ -66,49 +149,14 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Navigation() {
+export default function Navigation(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const [mobile, setMobile] = React.useState(props.isMobile);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  return (
-    <div>
-      <Grid container className={classes.borderBottom}>
-        <Grid item xs={12} sm={10}>
-          <div className={classes.root}>
-            <AppBar position="static" className={classes.tabsRoot}>
-              <Tabs value={value} onChange={handleChange} aria-label="Navigation Bar">
-                <Tab label="Board" {...a11yProps(0)} />
-                <Tab label="Transactions" {...a11yProps(1)} />
-                <Tab label="Settings" {...a11yProps(2)} />
-                <Tab label="Support" {...a11yProps(2)} />
-              </Tabs>
-            </AppBar>
-          </div>  
-        </Grid>
-        <Grid item xs={12} sm={2} className={classes.transaction}>
-          <div className={classes.transaction}>
-            <Button variant="outlined" color="primary">New Transaction</Button>      
-          </div>
-        </Grid>
-      </Grid>
-      <div>
-        <TabPanel value={value} index={0}>
-          < Dashboard />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          < Transactions />
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          < Settings />
-        </TabPanel>
-        <TabPanel value={value} index={3}>
-          < Support />
-        </TabPanel>
-      </div>
-    </div>
-  );
+  return mobile ? (<MobileView classes={classes} value={value} handleChange={handleChange} />) : (<WebView classes={classes} value={value} handleChange={handleChange} /> )
 }
