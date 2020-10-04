@@ -10,6 +10,8 @@ import Dashboard from './Dashboard.js';
 import Transactions from './Transactions.js';
 import Settings from './Settings.js';
 import Support from './Support.js';
+import { Button } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -47,8 +49,21 @@ function a11yProps(index) {
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.background.default,
   },
+  transaction: {
+    display: 'flex',
+    height: 'inherit',
+    justifyContent: 'flex-end',
+    padding: '5px'
+  },
+  tabsRoot: {
+    backgroundColor: 'white',
+    color: 'black',
+  },
+  borderBottom: {
+    borderBottom: '1px solid #ebebeb'
+  }
 }));
 
 export default function Navigation() {
@@ -60,27 +75,40 @@ export default function Navigation() {
   };
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Tabs value={value} onChange={handleChange} aria-label="Navigation Bar">
-          <Tab label="Board" {...a11yProps(0)} />
-          <Tab label="Transactions" {...a11yProps(1)} />
-          <Tab label="Settings" {...a11yProps(2)} />
-          <Tab label="Support" {...a11yProps(2)} />
-        </Tabs>
-      </AppBar>
-      <TabPanel value={value} index={0}>
-        < Dashboard />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        < Transactions />
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        < Settings />
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        < Support />
-      </TabPanel>
+    <div>
+      <Grid container className={classes.borderBottom}>
+        <Grid item xs={12} sm={10}>
+          <div className={classes.root}>
+            <AppBar position="static" className={classes.tabsRoot}>
+              <Tabs value={value} onChange={handleChange} aria-label="Navigation Bar">
+                <Tab label="Board" {...a11yProps(0)} />
+                <Tab label="Transactions" {...a11yProps(1)} />
+                <Tab label="Settings" {...a11yProps(2)} />
+                <Tab label="Support" {...a11yProps(2)} />
+              </Tabs>
+            </AppBar>
+          </div>  
+        </Grid>
+        <Grid item xs={12} sm={2} className={classes.transaction}>
+          <div className={classes.transaction}>
+            <Button variant="outlined" color="primary">New Transaction</Button>      
+          </div>
+        </Grid>
+      </Grid>
+      <div>
+        <TabPanel value={value} index={0}>
+          < Dashboard />
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          < Transactions />
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          < Settings />
+        </TabPanel>
+        <TabPanel value={value} index={3}>
+          < Support />
+        </TabPanel>
+      </div>
     </div>
   );
 }
