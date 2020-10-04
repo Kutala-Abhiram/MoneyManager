@@ -12,6 +12,8 @@ import Settings from './Settings.js';
 import Support from './Support.js';
 import { Button } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
+import { Modal } from '@material-ui/core';
+import TransactionForm from './TransactionForm.js';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -34,45 +36,78 @@ function TabPanel(props) {
 }
 
 const NewTransaction = (props) => {
-  const {classes, ...other} = props;
+  const {classes, showModal, ...other} = props;
+
   return (
     <Grid item xs={6} sm={2} className={classes.transaction}>
       <div className={classes.transaction}>
-        <Button variant="outlined" color="primary">New Transaction</Button>      
+        <Button variant="outlined" color="primary" onClick={showModal} >New Transaction</Button> 
       </div>
-    </Grid>
+    </Grid>     
+  );
+}
+
+const TransactionModal = (props) => {
+  const {handleClose, show, ...others} = props;
+
+  return (
+    <Modal open={show} onClose={handleClose} aria-labelledby="simple-modal-title" aria-describedby="simple-modal-description">
+      <div>
+        <TransactionForm />
+      </div>
+    </Modal>
   );
 }
 
 const MobileView = (props) => {
   const {classes, value, handleChange, ...other} = props;
+  const [show, setShow] = React.useState(false);
+
+  const showModal = (event) => {
+    setShow(true);
+  };
+
+  const hideModal = (event) => {
+    setShow(false);
+  };
 
   return (
-    <div>
+    <main>
       <Grid container className={classes.borderBottom}>
         <Grid item xs={6} sm={1}>
         </Grid>
-        <NewTransaction classes={classes} />
+        <NewTransaction classes={classes} showModal={showModal} />
         <AppGrid classes={classes} value={value} handleChange={handleChange} />
       </Grid>
-      <TabPanels classes={classes} value={value} handleChange={handleChange} />      
-    </div>
+      <TabPanels classes={classes} value={value} handleChange={handleChange} />   
+      <TransactionModal handleClose={hideModal} show={show} />   
+    </main>
   );
 }
 
 const WebView = (props) => {
   const {classes, value, handleChange, ...other} = props;
+  const [show, setShow] = React.useState(false);
+
+  const showModal = (event) => {
+    setShow(true);
+  };
+
+  const hideModal = (event) => {
+    setShow(false);
+  };
 
   return (
-    <div>
+    <main>
       <Grid container className={classes.borderBottom}>
         <Grid item xs={6} sm={1}>
         </Grid>
         <AppGrid classes={classes} value={value} handleChange={handleChange} />
-        <NewTransaction classes={classes} />
+        <NewTransaction classes={classes} showModal={showModal} />
       </Grid>
-      <TabPanels classes={classes} value={value} handleChange={handleChange} />      
-    </div>
+      <TabPanels classes={classes} value={value} handleChange={handleChange} /> 
+      <TransactionModal handleClose={hideModal} show={show} />        
+    </main>
   );
 }
 
@@ -153,6 +188,7 @@ export default function Navigation(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [mobile, setMobile] = React.useState(props.isMobile);
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
